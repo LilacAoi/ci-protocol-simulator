@@ -6,8 +6,10 @@
     <title>CI倫理プロトコル PoCシミュレーター</title>
     <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
+  img-src 'self' data:;
   style-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
-  script-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com 'unsafe-inline';
+  script-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com 'unsafe-inline' 'unsafe-eval';
+  connect-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com;
 ">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React and ReactDOM from CDN (UMD builds, creates global variables) -->
