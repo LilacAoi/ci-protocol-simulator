@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CI倫理プロトコル PoCシミュレーター</title>
+    <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  style-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
+  script-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com 'unsafe-inline';
+">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React and ReactDOM from CDN (UMD builds, creates global variables) -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -43,7 +48,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-XFhQ59PW.js"></script>
+  <script type="module" crossorigin src="/ci-protocol-simulator/assets/index-XFhQ59PW.js"></script>
 </head>
   <body class="bg-slate-900 text-slate-200">
     <div id="root"></div>
