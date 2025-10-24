@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CI倫理プロトコル PoCシミュレーター</title>
-    <meta http-equiv="Content-Security-Policy" content="
+   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  img-src 'self' data:;
+  img-src 'self' data:;  <-- 🌐 faviconsやローカル画像を許可
   style-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
-  script-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com 'unsafe-inline' 'unsafe-eval';
+  script-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com 'unsafe-inline' 'unsafe-eval'; <-- 🚨 Babel実行のために必須
   connect-src 'self' https://unpkg.com https://cdn.tailwindcss.com https://aistudiocdn.com;
 ">
     <script src="https://cdn.tailwindcss.com"></script>
