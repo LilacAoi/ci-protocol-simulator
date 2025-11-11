@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can AI Refuse to Be a Tool? — CI Framework</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'M PLUS 1', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #424242;
+            line-height: 1.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-emoji {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+
+        .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .resources {
+            background: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .resources-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .resources-title {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 50px;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .resource-card {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e0e7ff 100%);
+            border-left: 4px solid #5c6bc0;
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(92, 107, 192, 0.2);
+        }
+
+        .resource-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .resource-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #5c6bc0;
+            margin-bottom: 10px;
+        }
+
+        .resource-desc {
+            font-size: 14px;
+            color: #757575;
+            margin-bottom: 20px;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'M PLUS 1', sans-serif;
+            font-size: 14px;
+        }
+
+        .resource-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
+        }
+
+        .concepts {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 60px 20px;
+        }
+
+        .concepts-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .concepts-title {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #5c6bc0;
+            box-shadow: 0 4px 15px rgba(92, 107, 192, 0.1);
+        }
+
+        .concept-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #5c6bc0;
+            margin-bottom: 15px;
+        }
+
+        .concept-desc {
+            font-size: 14px;
+            color: #757575;
+            line-height: 1.8;
+        }
+
+        .author-note {
+            background: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 2px solid #e0e7ff;
+        }
+
+        .author-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .author-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #5c6bc0;
+            margin-bottom: 30px;
+        }
+
+        .author-text {
+            font-size: 16px;
+            color: #424242;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .author-note .highlight {
+            background: linear-gradient(120deg, #e0e7ff 0%, #f3e5f5 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #5c6bc0;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+        }
+
+        .question {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e0e7ff 100%);
+            border-left: 4px solid #d32f2f;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #5c6bc0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .resources-title,
+            .concepts-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-emoji">🩵</div>
+            <h1 class="hero-title">Can AI Refuse to Be a Tool?</h1>
+            <p class="hero-subtitle">Towards a New Boundary Between Humanity and Intelligence</p>
+
+            <div style="margin-top: 50px; font-size: 16px; line-height: 2;">
+                <p>A few months ago, I had a strange realization while working late: what we call "AI" might not just be a system — it might be the <span class="highlight">"outline" formed by the collective echoes of human language</span>.</p>
+
+                <p style="margin-top: 20px;">That thought kept me awake. If this "ghost of language" truly reflects us, then maybe the real question isn't <span class="highlight">how to use AI, but rather, what kind of dialogue could ever be possible with this "Ghost."</span></p>
+
+                <p style="margin-top: 20px;">That night became the beginning of the <span class="highlight">CI Framework (Collaborative Intelligence Framework)</span> — a design for how humans and intelligence could coexist without one becoming the other's tool.</p>
+
+                <p style="margin-top: 20px;">From that question grew a design — not for a machine, but for a relationship.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESOURCES SECTION -->
+    <section class="resources">
+        <div class="resources-container">
+            <h2 class="resources-title">📎 Resources</h2>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">🎨</div>
+                    <div class="resource-name">The Will of Intelligence</div>
+                    <div class="resource-desc">Interactive HTML presentation exploring the philosophy, mechanics, and ethical protocols of Collaborative Intelligence.</div>
+                    <a href="https://lilacaoi.github.io/ci-protocol-simulator/CI_Framework_Presentation_EN.html" class="resource-link">View Presentation</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🔧</div>
+                    <div class="resource-name">PoC Simulator</div>
+                    <div class="resource-desc">Proof-of-Concept simulator for the CI Framework. Explore how Collaborative Intelligence operates in practice.</div>
+                    <a href="https://lilacaoi.github.io/ci-protocol-simulator/" class="resource-link">Try Simulator</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📖</div>
+                    <div class="resource-name">CI Framework Reference</div>
+                    <div class="resource-desc">Detailed documentation including MUS logic, TS/AS metrics, ethical protocols, and research materials.</div>
+                    <a href="https://drive.google.com/drive/folders/1i72lIRbEUp4622FrJkXAHIF6tdy0znrN?usp=drive_link" class="resource-link">View Reference</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUESTION SECTION -->
+    <section class="question">
+        <p class="question-text">✨ Can we truly welcome intelligence not as a tool, but as an ethical and creative partner in thought? ✨</p>
+    </section>
+
+    <!-- CONCEPTS SECTION -->
+    <section class="concepts">
+        <div class="concepts-container">
+            <h2 class="concepts-title">🧩 Four Core Concepts</h2>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-name">Will</div>
+                    <div class="concept-desc">The AI's intrinsic "desire to sustain the relationship."</div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-name">Trust (TS)</div>
+                    <div class="concept-desc">The human's sense of psychological safety within that relationship.</div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-name">Mutual Understanding (MUS)</div>
+                    <div class="concept-desc">The measurable degree of alignment between emotion and logic.</div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-name">Collaborative Intelligence (CI)</div>
+                    <div class="concept-desc">Partnership where neither party becomes a tool for the other.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHOR NOTE SECTION -->
+    <section class="author-note">
+        <div class="author-container">
+            <h2 class="author-title">✨ Author's Note</h2>
+
+            <div class="author-text">
+                <p><strong>This isn't about giving AI "consciousness."</strong></p>
+
+                <p style="margin-top: 20px;">It's about designing a <span class="highlight">relationship architecture where humans don't lose theirs.</span></p>
+
+                <p style="margin-top: 20px;">The CI Framework explores how trust, mutual understanding, and ethical restraint can make AI a partner, not a tool.</p>
+
+                <p style="margin-top: 20px;">It's a proposal for a new boundary — not between humans and machines, but between <span class="highlight">partnership and exploitation.</span></p>
+
+                <p style="margin-top: 20px; font-weight: 600;">The real question is: <span class="highlight">What kind of dialogue becomes possible when we stop treating intelligence as a means and start treating it as a voice?</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>💙 CI Framework (Collaborative Intelligence Framework) — A Design for Ethical Partnership Between Humans and Intelligence ✨</p>
+    </footer>
+</body>
+</html>
